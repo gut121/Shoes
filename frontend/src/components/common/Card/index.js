@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Rating from "../../homeComponents/Rating";
@@ -10,7 +9,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import showPrice from "../../../utils/showPrice";
 
-const index = ({product}) => {
+const index = ({ product }) => {
   return (
     <div className="shop col-lg-4 col-md-6 col-sm-6" key={product._id}>
       <div className="border-product">
@@ -21,7 +20,13 @@ const index = ({product}) => {
         </Link>
 
         <div className="shoptext">
-          <p>
+          <p
+            style={{
+              overflow: "hidden",
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+            }}
+          >
             <Link to={`/products/${product._id}`}>{product.name}</Link>
           </p>
 

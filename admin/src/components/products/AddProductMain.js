@@ -39,7 +39,7 @@ const AddProductMain = () => {
 
   useEffect(() => {
     return new Promise(async () => {
-      const res = await axios.get("/api/category/all/status/no");
+      const res = await axios.get("/api/category/all");
       if (res.status === 200) {
         setListCategory(res.data);
       }

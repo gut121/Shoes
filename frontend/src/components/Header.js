@@ -1,10 +1,16 @@
-import React, { useEffect, useState,useRef, useLayoutEffect, useCallback } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useLayoutEffect,
+  useCallback,
+} from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/Actions/userActions";
 import { listProduct, listSearch } from "..//Redux/Actions/ProductActions";
 import store from "../Redux/store";
-import { debounce } from "lodash"
+import { debounce } from "lodash";
 import Loading from "./LoadingError/Loading";
 
 const Header = () => {
@@ -35,17 +41,19 @@ const Header = () => {
   };
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
-  console.log(loading,products)
+  console.log(loading, products);
   // useEffect(() => {
   //   listStore = JSON.parse(localStorage.getItem('favorite'))|| 0;
   // },[JSON.parse(JSON.stringify(listStore))])
 
-
-  const debounceSearch= useCallback(debounce((nextValue) => dispatch(listProduct(nextValue)), 800), [])
-  const handleChange =async (e) => {
+  const debounceSearch = useCallback(
+    debounce((nextValue) => dispatch(listProduct(nextValue)), 800),
+    []
+  );
+  const handleChange = async (e) => {
     setKeyword(e.target.value);
     keyword.trim();
-    debounceSearch(keyword)
+    debounceSearch(keyword);
     if (e.target.value == "") {
       setDisplayImgPreview(true);
     } else {
@@ -55,7 +63,7 @@ const Header = () => {
     // setProductListSearch(dataListProduct)
     // const { loading, error, products } = productListSearch;
   };
-  
+
   const submitHandler = (e) => {
     e.preventDefault();
     keyword.trim();
@@ -70,7 +78,7 @@ const Header = () => {
           <div className="row">
             <div className="col-md-6 d-flex align-items-center display-none">
               <p>+84 123 456 789</p>
-              <p>ahafood@gmail.com</p>
+              <p>ahashoe@gmail.com</p>
             </div>
             <div className=" col-12 col-lg-6 justify-content-center justify-content-lg-end d-flex align-items-center">
               <Link to="">
@@ -204,7 +212,16 @@ const Header = () => {
                       className="search__preview"
                       onClick={handleSearchPreview}
                     >
-                      <span onClick={handleClosePreview} style={{float:'right',margin:'20px',cursor:'pointer'}}>❌</span>
+                      <span
+                        onClick={handleClosePreview}
+                        style={{
+                          float: "right",
+                          margin: "20px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        ❌
+                      </span>
                       {displayImgPreview ? (
                         <div
                           style={{
@@ -218,26 +235,49 @@ const Header = () => {
                           <h2>Ăn Gì Nào ?</h2>
                           <img src={`/images/search.png`} alt="search" />
                         </div>
-                      ) : 
-                      (loading) ? (<loading/>):((store
-                        .getState()
-                        .productList.products.length !=0)?(
+                      ) : loading ? (
+                        <loading />
+                      ) : store.getState().productList.products.length != 0 ? (
                         <div className="preview_list">
                           {products.map((item, index) => (
-                              <div className="preview_item" style={{marginLeft:'10px',marginBottom:'10px',display:'flex',justifyContent:'space-between',transaction:'1s'}}>
-                              <Link  to={`/products/${item._id}`} >
-                                <img src={item.image} width={50} alt={item.name} style={{margin:'5px' ,transaction:'1s'}} />
+                            <div
+                              className="preview_item"
+                              style={{
+                                marginLeft: "10px",
+                                marginBottom: "10px",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                transaction: "1s",
+                              }}
+                            >
+                              <Link to={`/products/${item._id}`}>
+                                <img
+                                  src={item.image}
+                                  width={50}
+                                  alt={item.name}
+                                  style={{ margin: "5px", transaction: "1s" }}
+                                />
                                 <span>{item.name}</span>
                               </Link>
                               {/* <i class="fa-solid fa-paper-plane" style={{cursor:'pointer'}}></i> */}
-                              </div>
-                            ))}
+                            </div>
+                          ))}
                         </div>
-                      ):(<>
-                      <p style={{fontSize:"40px",color:'#fff',textAlign:'center',marginTop:'30px'}}>Not Found 📛</p>
-                      {/* <img src="/images/notfoundsearch.png" width={300} alt="not found" /> */}
-                      </>))} 
-                      
+                      ) : (
+                        <>
+                          <p
+                            style={{
+                              fontSize: "40px",
+                              color: "#fff",
+                              textAlign: "center",
+                              marginTop: "30px",
+                            }}
+                          >
+                            Not Found 📛
+                          </p>
+                          {/* <img src="/images/notfoundsearch.png" width={300} alt="not found" /> */}
+                        </>
+                      )}
                     </div>
                   ) : (
                     <></>

@@ -12,7 +12,7 @@ const Sidebar = () => {
           <div className="aside-top">
             <Link to="/" className="brand-wrap">
               <img
-                src="https://yt3.googleusercontent.com/LmvbrWF4R7G5neK2adsSx3gwgdV7sbz5aG9MpRJSLRswvK5xYgt0kflRqPofKICdrgyRn95jVg=s900-c-k-c0x00ffffff-no-rj"
+                src="/images/logoPage.jpg"
                 style={{ height: "46" }}
                 className="logo"
                 alt="Ecommerce dashboard template"
